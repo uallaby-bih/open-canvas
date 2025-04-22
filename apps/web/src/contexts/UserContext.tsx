@@ -14,6 +14,7 @@ const mockUser: User = {
   app_metadata: {},
   user_metadata: {},
   aud: "authenticated",
+  created_at: new Date().toISOString(),
 };
 
 export function UserProvider({ children }: { children: ReactNode }) {
