@@ -1,6 +1,6 @@
 // Mocked Supabase client for server-side usage
 export function createClient(): any {
-  const mockUser = { id: "10" };
+  const mockUser = { id: "e7f3b2a1-4c6d-5e8f-9a0b-c1d2e3f4g5h6" };
   const mockAuth = {
     getUser: async () => ({ data: { user: mockUser } }),
     getSession: async () => ({ data: { session: {} } }),

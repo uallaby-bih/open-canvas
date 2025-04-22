@@ -10,7 +10,7 @@ type UserContentType = {
 const UserContext = createContext<UserContentType | undefined>(undefined);
 
 const mockUser: User = {
-  id: "10",
+  id: "e7f3b2a1-4c6d-5e8f-9a0b-c1d2e3f4g5h6",
   app_metadata: {},
   user_metadata: {},
   aud: "authenticated",
