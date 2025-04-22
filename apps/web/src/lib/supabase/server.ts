@@ -1,36 +1,20 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-
-export function createClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_URL is not defined");
-  }
-  if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined");
-  }
-
-  const cookieStore = cookies();
-
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            );
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
-      },
-    }
-  );
+// Mocked Supabase client for server-side usage
+export function createClient(): any {
+  const mockUser = { id: "10" };
+  const mockAuth = {
+    getUser: async () => ({ data: { user: mockUser } }),
+    getSession: async () => ({ data: { session: {} } }),
+    signInWithPassword: async () => ({ data: {}, error: null }),
+    signUp: async () => ({ data: {}, error: null }),
+    signOut: async () => ({ error: null }),
+    verifyOtp: async () => ({ data: {}, error: null }),
+    exchangeCodeForSession: async () => ({ data: { session: {}, user: mockUser }, error: null }),
+  };
+  const mockStorageFrom = () => ({
+    download: async (_path: string) => ({ data: new Blob(), error: null }),
+    upload: async (_path: string, _file: any, _opts?: any) => ({ data: { path: "" }, error: null }),
+    remove: async (_paths: string[]) => ({ data: {}, error: null }),
+    list: async () => ({ data: [], error: null }),
+  });
+  return { auth: mockAuth, storage: { from: mockStorageFrom } };
 }
