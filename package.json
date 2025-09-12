@@ -9,6 +9,7 @@
     "build": "turbo build",
     "turbo:command": "turbo",
     "format": "turbo format",
+    "format:check": "turbo format:check",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix"
   },
@@ -26,8 +27,5 @@
     "eslint-plugin-no-instanceof": "^1.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^3.3.3"
-  },
-  "resolutions": {
-    "@langchain/core": "^0.3.38"
   }
 }
